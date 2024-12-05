@@ -8,6 +8,14 @@ const getAllTasks = asyncWrapper(async (req, res) => {
   const tasks = await Task.find({});
   res.status(200).json({ tasks });
 });
+const getAllCompletedTasks = asyncWrapper(async (req, res) => {
+  const tasks = await Task.find({ completed: true });
+  res.status(200).json({ tasks });
+});
+const getAllIncompletedTasks = asyncWrapper(async (req, res) => {
+  const tasks = await Task.find({ completed: false });
+  res.status(200).json({ tasks });
+});
 
 const createTask = asyncWrapper(async (req, res) => {
   const task = await Task.create(req.body);
@@ -54,4 +62,6 @@ module.exports = {
   getTask,
   updateTask,
   deleteTask,
+  getAllCompletedTasks,
+  getAllIncompletedTasks,
 };
